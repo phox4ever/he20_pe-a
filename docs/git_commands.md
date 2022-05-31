@@ -10,25 +10,27 @@ datei dem git repository hinzufügen `git add newfile.txt`
 gestagte änderungen commiten `git commit -m "add newfile"`
 
 ##status:
-Status vom repository abrufen
+Status vom repository abrufen `git status`
 
 ##branch:
-Verwalten von repositories
+Anzeigen und erstellen von branches `git branch branchA`
 
 ##checkout:
-Repository branch auschecken
+Repository branch auschecken `git checkout branchA`
 
 ##merge:
-Änderungen einpflegen
+Änderungen einpflegen `git merge branchA`
+
+Fast Forward: Commits werden angefügt ohne zusätzlicher Commit
 
 ##clone:
-Repository lokal clonen
+Remote Repository lokal clonen `git clone URL`
 
 ##pull:
-Änderungen vom remote Repository herunterladen
+Änderungen vom remote Repository herunterladen `git pull`
 
 ##push:
-Änderungen zum remote Repository pushen
+Änderungen zum remote Repository pushen `git push`
 
 ##tag:
-Ein Commit mit einem Tag versehen
+Ein Commit mit einem Tag versehen `git tag -a tag`
