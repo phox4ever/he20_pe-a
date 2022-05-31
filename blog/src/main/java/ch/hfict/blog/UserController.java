@@ -14,7 +14,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
         }
         else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("");
         }
     }
 }
