@@ -1,4 +1,4 @@
-package ch.hfict.blog;
+package ch.hfict.blog.model;
 
 public class Status {
     private final String status;

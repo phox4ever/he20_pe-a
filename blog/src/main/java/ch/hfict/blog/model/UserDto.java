@@ -1,10 +1,10 @@
-package ch.hfict.blog;
+package ch.hfict.blog.model;
 
-public class User {
+public class UserDto {
     private final String username;
     private final String password;
 
-    public User(String username, String password) {
+    public UserDto(String username, String password) {
         this.username = username;
         this.password = password;
     }

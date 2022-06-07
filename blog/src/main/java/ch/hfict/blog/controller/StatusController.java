@@ -1,10 +1,9 @@
-package ch.hfict.blog;
+package ch.hfict.blog.controller;
 
+import ch.hfict.blog.model.Status;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class StatusController {
