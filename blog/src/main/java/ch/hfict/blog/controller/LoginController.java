@@ -1,6 +1,6 @@
 package ch.hfict.blog.controller;
 
-import ch.hfict.blog.UsersRepository;
+import ch.hfict.blog.repository.UsersRepository;
 import ch.hfict.blog.model.LoginDto;
 import ch.hfict.blog.model.User;
 import org.springframework.beans.factory.annotation.Autowired;

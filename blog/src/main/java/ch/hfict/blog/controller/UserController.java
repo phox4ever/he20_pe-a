@@ -1,8 +1,7 @@
 package ch.hfict.blog.controller;
 
 
-import ch.hfict.blog.UsersRepository;
-import ch.hfict.blog.model.Status;
+import ch.hfict.blog.repository.UsersRepository;
 import ch.hfict.blog.model.User;
 import ch.hfict.blog.model.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -36,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User get(@PathVariable String id) {
+    public Optional<User> get(@PathVariable String id) {
         return usersRepository.findById(Long.parseLong(id));
     }
 }
