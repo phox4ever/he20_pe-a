@@ -2,6 +2,7 @@ package ch.hfict.blog.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -14,6 +15,9 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
     private LocalDateTime date;
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+    private List<Comment> comments;
 
     public Post(String title, String content, User user) {
         this.title = title;

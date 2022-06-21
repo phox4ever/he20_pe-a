@@ -1,7 +1,7 @@
 package ch.hfict.blog.controller;
 
 
-import ch.hfict.blog.repository.UsersRepository;
+import ch.hfict.blog.repository.UserRepository;
 import ch.hfict.blog.model.User;
 import ch.hfict.blog.model.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,27 +15,27 @@ import java.util.Optional;
 @RestController
 public class UserController {
     @Autowired
-    private UsersRepository usersRepository;
+    private UserRepository userRepository;
 
     @PostMapping("/users")
     public ResponseEntity<String> create(@RequestBody UserDto userDto) {
         User user = new User(userDto.getUsername(), userDto.getPassword());
-        if (!usersRepository.findByUsername(userDto.getUsername()).isEmpty()) {
+        if (!userRepository.findByUsername(userDto.getUsername()).isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body("Benutzer existiert bereits");
         }
         else {
-            usersRepository.save(user);
+            userRepository.save(user);
             return ResponseEntity.status(HttpStatus.OK).body(user.getId().toString());
         }
     }
 
     @GetMapping("/users")
     public List<User> list() {
-        return (List<User>) usersRepository.findAll();
+        return (List<User>) userRepository.findAll();
     }
 
     @GetMapping("/users/{id}")
     public Optional<User> get(@PathVariable String id) {
-        return usersRepository.findById(Long.parseLong(id));
+        return userRepository.findById(Long.parseLong(id));
     }
 }

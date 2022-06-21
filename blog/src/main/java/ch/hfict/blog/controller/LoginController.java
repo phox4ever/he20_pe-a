@@ -1,6 +1,6 @@
 package ch.hfict.blog.controller;
 
-import ch.hfict.blog.repository.UsersRepository;
+import ch.hfict.blog.repository.UserRepository;
 import ch.hfict.blog.model.LoginDto;
 import ch.hfict.blog.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,10 @@ import java.util.Objects;
 
 @RestController
 public class LoginController {
-    @Autowired private UsersRepository usersRepository;
+    @Autowired private UserRepository userRepository;
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-        List<User> users = usersRepository.findByUsername(loginDto.getUsername());
+        List<User> users = userRepository.findByUsername(loginDto.getUsername());
         if (!users.isEmpty() && Objects.equals(users.get(0).getPassword(), loginDto.getPassword())) {
             return ResponseEntity.status(HttpStatus.OK).body(users.get(0).toString());
         }

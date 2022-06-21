@@ -1,0 +1,62 @@
+###
+GET http://localhost:8080/status?status=OK
+
+###
+POST http://localhost:8080/users
+content-type: application/json
+
+{"username":"test","password":"12345"}
+
+###
+POST http://localhost:8080/login
+content-type: application/json
+
+{"username":"test","password":"1234"}
+
+###
+POST http://localhost:8080/login
+content-type: application/json
+
+{"username":"test","password":"12345"}
+
+###
+POST http://localhost:8080/users
+content-type: application/json
+
+{"username":"test2","password":"23456"}
+
+###
+POST http://localhost:8080/users
+content-type: application/json
+
+{"username":"test3","password":"34567"}
+
+###
+GET http://localhost:8080/users
+
+###
+GET http://localhost:8080/users/1
+
+###
+POST http://localhost:8080/posts
+content-type: application/json
+
+{"title":"test","content":"test","userId":1}
+
+###
+POST http://localhost:8080/posts
+content-type: application/json
+
+{"title":"test2","content":"test2","userId":2}
+
+###
+GET http://localhost:8080/posts
+
+###
+POST http://localhost:8080/posts/4/comments
+content-type: application/json
+
+{"comment":"test comment","userId":2}
+
+###
+GET http://localhost:8080/posts/4/comments

@@ -17,6 +17,9 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Comment> comments;
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;

@@ -9,6 +9,4 @@ import java.util.List;
 public interface PostRepository extends CrudRepository<Post, Long> {
 
     public List<Post> findByUser(User user);
-
-    public Post findById(long id);
 }

@@ -5,7 +5,7 @@ import ch.hfict.blog.model.Post;
 import ch.hfict.blog.model.PostDto;
 import ch.hfict.blog.model.User;
 import ch.hfict.blog.repository.PostRepository;
-import ch.hfict.blog.repository.UsersRepository;
+import ch.hfict.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +20,11 @@ public class PostController {
     private PostRepository postRepository;
 
     @Autowired
-    private UsersRepository usersRepository;
+    private UserRepository userRepository;
 
     @PostMapping("/posts")
     public ResponseEntity<String> create(@RequestBody PostDto postDto) {
-        Optional<User> authorOptional = usersRepository.findById(postDto.getUserId());
+        Optional<User> authorOptional = userRepository.findById(postDto.getUserId());
         if (authorOptional.isPresent()) {
             User user = authorOptional.get();
             Post post = new Post(postDto.getTitle(), postDto.getContent(), user);
