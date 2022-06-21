@@ -1,5 +1,8 @@
 package ch.hfict.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,8 +13,10 @@ public class User extends Auditable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long id;
+
     private String username;
 
+    @JsonIgnore
     private String password;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
