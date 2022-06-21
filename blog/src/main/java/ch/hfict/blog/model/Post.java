@@ -1,11 +1,10 @@
 package ch.hfict.blog.model;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-public class Post {
+public class Post extends Auditable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -14,7 +13,6 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-    private LocalDateTime date;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     private List<Comment> comments;
@@ -23,7 +21,6 @@ public class Post {
         this.title = title;
         this.content = content;
         this.user = user;
-        this.date = LocalDateTime.now();
     }
 
     protected Post() {
@@ -44,10 +41,6 @@ public class Post {
 
     public User getUser() {
         return user;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
     }
 
     public void setTitle(String title) {
