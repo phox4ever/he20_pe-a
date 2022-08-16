@@ -53,6 +53,9 @@ content-type: application/json
 GET http://localhost:8080/posts
 
 ###
+GET http://localhost:8080/posts?findByUserId=1
+
+###
 POST http://localhost:8080/posts/4/comments
 content-type: application/json
 

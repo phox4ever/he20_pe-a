@@ -9,4 +9,6 @@ import java.util.List;
 public interface PostRepository extends CrudRepository<Post, Long> {
 
     public List<Post> findByUser(User user);
+
+    List<Post> findByUserId(Long findByUserId);
 }

@@ -37,8 +37,13 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public List<Post> list() {
-        return (List<Post>) postRepository.findAll();
+    public List<Post> list(@RequestParam(required = false) Long findByUserId) {
+        if (findByUserId != null) {
+            return postRepository.findByUserId(findByUserId);
+        }
+        else {
+            return (List<Post>) postRepository.findAll();
+        }
     }
 
     @GetMapping("/posts/{id}")

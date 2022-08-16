@@ -19,11 +19,14 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<String> create(@RequestBody UserDto userDto) {
-        User user = new User(userDto.getUsername(), userDto.getPassword());
-        if (!userRepository.findByUsername(userDto.getUsername()).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body("Benutzer existiert bereits");
+        if (userDto.getPassword() == null || userDto.getPassword().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Passwort darf nicht leer sein");
+        }
+        else if (!userRepository.findByUsername(userDto.getUsername()).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Benutzer existiert bereits");
         }
         else {
+            User user = new User(userDto.getUsername(), userDto.getPassword());
             userRepository.save(user);
             return ResponseEntity.status(HttpStatus.OK).body(user.getId().toString());
         }
