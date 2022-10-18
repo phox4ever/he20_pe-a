@@ -32,10 +32,17 @@ public class PostInterceptor implements HandlerInterceptor {
 
         String[] jwtTokenArray = authHeader.split(" ");
         String jwtToken = jwtTokenArray.length == 2 ? jwtTokenArray[1] : null;
-        DecodedJWT jwt = jwtToken != null ? Crypto.verifyToken(jwtToken) : null;
+
+        if (jwtToken == null) {
+            response.getWriter().println("Missing token");
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            return false;
+        }
+
+        DecodedJWT jwt = Crypto.verifyToken(jwtToken);
 
         if (jwt == null) {
-            response.getWriter().println("Unauthorized");
+            response.getWriter().println("Invalid token");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             return false;
         }
