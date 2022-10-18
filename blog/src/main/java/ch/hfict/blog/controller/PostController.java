@@ -6,7 +6,11 @@ import ch.hfict.blog.model.PostDto;
 import ch.hfict.blog.model.User;
 import ch.hfict.blog.repository.PostRepository;
 import ch.hfict.blog.repository.UserRepository;
+import ch.hfict.blog.utils.Crypto;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,15 +27,14 @@ public class PostController {
     private UserRepository userRepository;
 
     @PostMapping("/posts")
-    public ResponseEntity<String> create(@RequestBody PostDto postDto) {
-        Optional<User> authorOptional = userRepository.findById(postDto.getUserId());
+    public ResponseEntity<String> create(@RequestBody PostDto postDto, @RequestAttribute Long userId) {
+        Optional<User> authorOptional = userRepository.findById(userId);
         if (authorOptional.isPresent()) {
             User user = authorOptional.get();
             Post post = new Post(postDto.getTitle(), postDto.getContent(), user);
             postRepository.save(post);
             return ResponseEntity.status(HttpStatus.OK).body("");
-        }
-        else {
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
         }
     }

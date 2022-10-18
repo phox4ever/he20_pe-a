@@ -2,15 +2,19 @@ package ch.hfict.blog;
 
 import ch.hfict.blog.model.User;
 import ch.hfict.blog.model.UserDto;
+import ch.hfict.blog.utils.Crypto;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Collections;
 import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,8 +28,22 @@ public class UserTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @BeforeEach
+    public void init() {
+        String token = Crypto.createToken(1L);
+        if (token != null) {
+            restTemplate.getRestTemplate().setInterceptors(
+                    Collections.singletonList((request, body, execution) -> {
+                        request.getHeaders()
+                                .setBearerAuth(token);
+                        return execution.execute(request, body);
+                    }));
+        }
+    }
+
     @Test
     public void listAllUsers() throws Exception {
+
         ResponseEntity<User[]> response = restTemplate.getForEntity(
                 "http://localhost:" + port + "/users", User[].class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
